@@ -6,7 +6,7 @@ env:
   TERM: 'xterm-256color'
 jobs:
   galaxy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -44,10 +44,10 @@ jobs:
           # repository: ${{ steps.head_repo_name.outputs.repo }}
           # ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Set up Python 3.9
+      - name: Set up Python 3.10
         uses: actions/setup-python@v3
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
       - name: Install httpie
         run: |
@@ -79,9 +79,9 @@ jobs:
       - name: Uninstalling GHA kustomize
         run: |
           # hack for uninstalling kustomize from GHA
-          mv /usr/local/bin/kustomize /usr/local/bin/ghakustomize
+          sudo mv /usr/local/bin/kustomize /usr/local/bin/ghakustomize
           make kustomize
-          mv ./bin/kustomize /usr/local/bin/kustomize
+          sudo mv ./bin/kustomize /usr/local/bin/kustomize
           kustomize version
         shell: bash
 
