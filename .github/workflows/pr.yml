@@ -79,9 +79,9 @@ jobs:
       - name: Uninstalling GHA kustomize
         run: |
           # hack for uninstalling kustomize from GHA
-          mv /usr/local/bin/kustomize /usr/local/bin/ghakustomize
+          sudo mv /usr/local/bin/kustomize /usr/local/bin/ghakustomize
           make kustomize
-          mv ./bin/kustomize /usr/local/bin/kustomize
+          sudo mv ./bin/kustomize /usr/local/bin/kustomize
           kustomize version
         shell: bash
 
